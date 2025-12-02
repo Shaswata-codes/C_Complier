@@ -70,28 +70,37 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <Header onRun={handleRun} isRunning={isRunning} />
       
       <main className="flex-1 p-4 md:p-6">
         <div className="flex flex-col lg:flex-row gap-4 h-full">
           {/* Editor Panel - 70% on desktop */}
-          <div className="lg:w-[70%] flex-shrink-0">
-            <CodeEditor code={code} onChange={setCode} />
+          <div className="lg:w-[70%] flex-shrink-0 relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+            <div className="relative">
+              <CodeEditor code={code} onChange={setCode} />
+            </div>
           </div>
           
           {/* Right Panel - Input + Output stacked */}
           <div className="lg:w-[30%] flex flex-col gap-4 min-h-[50vh] lg:min-h-0">
-            <div className="h-[25vh] lg:h-[35%]">
-              <InputPanel input={input} onChange={setInput} />
+            <div className="h-[25vh] lg:h-[35%] relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+              <div className="relative h-full">
+                <InputPanel input={input} onChange={setInput} />
+              </div>
             </div>
-            <div className="flex-1 min-h-[25vh]">
-              <OutputConsole
-                output={output}
-                error={error}
-                exitCode={exitCode}
-                isRunning={isRunning}
-              />
+            <div className="flex-1 min-h-[25vh] relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+              <div className="relative h-full">
+                <OutputConsole
+                  output={output}
+                  error={error}
+                  exitCode={exitCode}
+                  isRunning={isRunning}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -99,19 +108,22 @@ const Index = () => {
 
       {/* Mobile Run Button */}
       <div className="lg:hidden fixed bottom-4 right-4 z-50">
-        <button
-          onClick={handleRun}
-          disabled={isRunning}
-          className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center glow-primary shadow-lg active:scale-95 transition-transform disabled:opacity-50"
-        >
-          {isRunning ? (
-            <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-          ) : (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </button>
+        <div className="relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+          <button
+            onClick={handleRun}
+            disabled={isRunning}
+            className="relative w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-xl shadow-cyan-500/50 active:scale-95 transition-all duration-200 disabled:opacity-50 hover:shadow-2xl hover:shadow-cyan-500/60"
+          >
+            {isRunning ? (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
