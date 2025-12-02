@@ -9,14 +9,7 @@ import { toast } from "@/hooks/use-toast";
 const DEFAULT_CODE = `#include <stdio.h>
 
 int main() {
-    printf("Hello, World!\\n");
-    
-    // Example with input
-    int num;
-    printf("Enter a number: ");
-    scanf("%d", &num);
-    printf("You entered: %d\\n", num);
-    
+    printf("Shas Codes\\n");
     return 0;
 }`;
 
@@ -71,19 +64,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+
       <Header onRun={handleRun} isRunning={isRunning} />
-      
+
       <main className="flex-1 p-4 md:p-6">
         <div className="flex flex-col lg:flex-row gap-4 h-full">
-          {/* Editor Panel - 70% on desktop */}
+          {/* Editor Panel */}
           <div className="lg:w-[70%] flex-shrink-0 relative group">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
             <div className="relative">
               <CodeEditor code={code} onChange={setCode} />
             </div>
           </div>
-          
-          {/* Right Panel - Input + Output stacked */}
+
+          {/* Right Panel */}
           <div className="lg:w-[30%] flex flex-col gap-4 min-h-[50vh] lg:min-h-0">
             <div className="h-[25vh] lg:h-[35%] relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
@@ -91,6 +85,7 @@ const Index = () => {
                 <InputPanel input={input} onChange={setInput} />
               </div>
             </div>
+
             <div className="flex-1 min-h-[25vh] relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
               <div className="relative h-full">
@@ -125,6 +120,10 @@ const Index = () => {
           </button>
         </div>
       </div>
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-white/10 text-6xl font-bold tracking-widest select-none pointer-events-none">
+  SHAS CODES
+</div>
+
     </div>
   );
 };
